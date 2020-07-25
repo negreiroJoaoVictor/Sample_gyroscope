@@ -50,6 +50,15 @@
             android:layout_marginTop="20dp"
             android:text="" />
 
+        <TextView
+            android:id="@+id/Text_angular_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Text_z"
+            android:layout_marginTop="20dp"
+
+            />
+
 
     </LinearLayout>
 

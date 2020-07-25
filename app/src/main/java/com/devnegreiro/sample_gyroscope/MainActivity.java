@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         this.mViewHolder.text_x = findViewById(R.id.Text_x);
         this.mViewHolder.text_y = findViewById(R.id.Text_y);
         this.mViewHolder.text_z = findViewById(R.id.Text_z);
+        this.mViewHolder.text_angularSpeed = findViewById(R.id.Text_angular_speed);
 
     }
 
@@ -60,16 +61,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         float y = sensorEvent.values[1];
         float z = sensorEvent.values[2];
 
+        //calculate the angular speed of the sample
+        float omegaMagnitude = (float) Math.sqrt(x*x + y*y + z*z);
+
         //Float to decimal with a new scale
         BigDecimal bd_x = new BigDecimal(x).setScale(3, RoundingMode.HALF_EVEN);
         BigDecimal bd_y = new BigDecimal(y).setScale(3, RoundingMode.HALF_EVEN);
         BigDecimal bd_z = new BigDecimal(z).setScale(3, RoundingMode.HALF_EVEN);
+        BigDecimal bd_omegaMagnitude = new BigDecimal(omegaMagnitude).setScale(3, RoundingMode.HALF_EVEN);
+
+
 
         //print in the screen each sample x,y and z.
         this.mViewHolder.text_x.setText("X:" +  bd_x + "rad/s");
         this.mViewHolder.text_y.setText("Y:" +  bd_y + "rad/s");
         this.mViewHolder.text_z.setText("Z:" +  bd_z + "rad/s");
-
+        this.mViewHolder.text_angularSpeed.setText("Angular Speed:" + bd_omegaMagnitude + "rad/s");
 
     }
     //onAccuracyChanged is abstract method of SensorEventListener
@@ -80,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
     public static class ViewHolder{
-        TextView text_x, text_y, text_z;
+        TextView text_x, text_y, text_z,text_angularSpeed;
 
     }
 }
